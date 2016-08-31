@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ajax Posts</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/ajax_scripts.js' %}"></script>
+</head>
+<body>
+    <h1>Posts</h1>
+    <div class="posts">
+        {% for post in posts %}
+        <div class="post">
+            <p>{{post.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <form action="{% url 'posts' %}" method="post">
+        {% csrf_token %}
+        {{new_post.as_p}}
+        <input type="submit" name="name" value="Add New Post">
+    </form>
+</body>
+</html>
